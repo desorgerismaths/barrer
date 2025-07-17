@@ -1,0 +1,402 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}\usepackage{amssymb}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{calc}
+\usepackage{enumerate}
+\usepackage{pst-func}
+\usepackage{pstricks-add}
+\usepackage{hyperref}
+\hypersetup{
+    pdfauthor={Yoann Morel},
+    pdfsubject={Ordre et intervalles},
+    pdftitle={Nombres, ordre et intervalles},
+    pdfkeywords={mathématiques, cours, exercices, 
+      ordre, intervalle} 
+}
+\hypersetup{
+    colorlinks = true,
+    linkcolor = red,
+    anchorcolor = red,
+    citecolor = blue,
+    filecolor = red,
+    urlcolor = red
+}
+
+% Raccourcis diverses:
+\newcommand{\nwc}{\newcommand}
+\nwc{\dsp}{\displaystyle}
+\nwc{\bge}{\begin{equation}}\nwc{\ene}{\end{equation}}
+\nwc{\bgar}{\begin{array}}\nwc{\enar}{\end{array}}
+\nwc{\bgit}{\begin{itemize}}\nwc{\enit}{\end{itemize}}
+
+\nwc{\la}{\left\{}\nwc{\ra}{\right\}}
+\nwc{\lp}{\left(}\nwc{\rp}{\right)}
+\nwc{\lb}{\left[}\nwc{\rb}{\right]}
+
+\nwc{\ul}{\underline}
+
+\nwc{\bgsk}{\bigskip}
+\nwc{\vsp}{\vspace{0.1cm}}
+\nwc{\vspd}{\vspace{0.2cm}}
+\nwc{\vspt}{\vspace{0.3cm}}
+\nwc{\vspq}{\vspace{0.4cm}}
+
+\def\N{{\rm I\kern-.1567em N}}
+\def\R{{\rm I\kern-.1567em R}}
+\def\Z{{\sf Z\kern-4.5pt Z}}
+
+\nwc{\tm}{\times}
+
+\newcounter{nex}\setcounter{nex}{0}
+\newenvironment{EX}{%
+\stepcounter{nex}
+\bgsk{\large {\bf Exercice }\arabic{nex}}\hspace{0.5cm}
+}{}
+
+\nwc{\bgex}{\begin{EX}}\nwc{\enex}{\end{EX}}
+
+
+\setlength{\topmargin}{0cm}
+\setlength{\oddsidemargin}{10cm}
+\setlength{\evensidemargin}{10cm}
+\setlength{\textwidth}{21.cm}
+\setlength{\textheight}{25cm}
+\setlength{\columnsep}{30pt}
+\setlength{\columnseprule}{1pt}
+\setlength{\headsep}{0in}
+\setlength{\parskip}{0ex}
+\setlength{\parindent}{0mm}
+\setlength{\footskip}{1.5cm}
+\setlength{\voffset}{0cm}
+
+
+\newcommand{\ct}{\centerline}
+\newcommand{\ctbf}[1]{\ct{\bf #1}}
+
+\renewcommand{\no}{\noindent}
+
+\nwc{\bgfg}{\begin{figure}}\nwc{\enfg}{\end{figure}}
+  \nwc{\epsx}{\epsfxsize}\nwc{\epsy}{\epsfysize}
+\nwc{\bgmp}{\begin{minipage}}\nwc{\enmp}{\end{minipage}}
+
+\newenvironment{theoreme}{\paragraph{Théorème:} \it}{}
+\nwc{\bgth}{\begin{theoreme}}\nwc{\enth}{\end{theoreme}}
+
+\newenvironment{Notation}{\paragraph{\ulg{Notation:}} \it}{}
+\nwc{\bgnot}{\begin{Notation}}\nwc{\enot}{\end{Notation}}
+
+\newenvironment{lemme}{\paragraph{Lemme:} \it}{}
+\nwc{\bglem}{\begin{lemme}}\nwc{\enlem}{\end{lemme}}
+
+\newtheorem{corol}{Corollaire}
+
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\alph{subsubsection})}
+
+\nwc{\ulr}[1]{\textcolor{red}{\underline{\textcolor{black}{#1}}}}
+\nwc{\ulb}[1]{\textcolor{blue}{\underline{\textcolor{black}{#1}}}}
+\nwc{\ulg}[1]{\textcolor{green}{\underline{\textcolor{black}{#1}}}}
+
+\nwc{\sectionc}[1]{\section{\ulr{#1}}}
+\nwc{\subsectionc}[1]{\subsection{\ulr{#1}}}
+\nwc{\subsubsectionc}[1]{\subsubsection{\ulr{#1}}}
+
+\newenvironment{definitioncolor}{\paragraph{\ulb{Définition:}} \it}{}
+\nwc{\bgdefc}{\begin{definitioncolor}}
+\nwc{\enefc}{\end{definitioncolor}}
+
+
+\newenvironment{propcolor}{\paragraph{\ulr{Propriété:}} \it}{}
+\nwc{\bgpropc}{\begin{propcolor}}
+\nwc{\enpropc}{\end{propcolor}}
+
+
+\newlength{\colu}
+\newlength{\cold}
+\newlength{\colt}
+
+\setlength{\colu}{8cm}
+\setlength{\cold}{0.9\textwidth}
+\setlength{\colt}{6cm}
+
+\nwc{\deftitle}{Définition}
+\newlength{\ldef}\settowidth{\ldef}{\deftitle:}
+\nwc{\bgdef}[1]{\paragraph{\ulb{\deftitle:}} 
+  \begin{minipage}[t]{\cold-\ldef-2em}{\it #1}
+  \end{minipage}
+}
+
+\nwc{\proptitle}{Propriété}
+\newlength{\lprop}\settowidth{\lprop}{\proptitle:}
+\nwc{\bgprop}[1]{\paragraph{\ulb{\proptitle:}} 
+  \begin{minipage}[t]{\cold-\ldef-2em}{\it #1}
+  \end{minipage}
+}
+
+
+\textwidth=18cm
+\textheight=24cm
+\topmargin=-1cm
+\oddsidemargin=-1cm
+
+% Bandeau en bas de page
+\newcommand{\TITLE}{Nombres, ordre et intervalles}
+\author{Y. Morel}
+\date{}
+
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength{\headheight}{0cm}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.1pt}
+\lhead{}\chead{}\rhead{}
+\lfoot{Y. Morel - \href{https://xymaths.fr/Lycee/2nde/Mathematiques-2nde.php}{xymaths.fr - 2nde}}
+\cfoot{}
+\rfoot{\TITLE\ - $2^{\text{nde}}$ - \thepage/\pageref{LastPage}}
+\footskip=2cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\hfill{\LARGE \bf \TITLE}
+\hfill $2^{\mbox{\scriptsize{nde}}}$
+
+
+\setcounter{section}{0}
+\sectionc{Ordre}
+ 
+ \bgdef{
+   Soient a et b deux nombres réels. 
+   On dit que 
+    \bgit 
+      \item[$\bullet$] a est inférieur à b, et on note $a<b$ si
+	$a-b<0$. 
+      \item[$\bullet$] a est supérieur à b, et on note $a>b$ si
+      $a-b>0$.
+    \enit
+ }
+
+ \ul{Ex:} $2<3$ car $2-3=-1<0$\,;\ $-5>-6$ car $-5-(-6)=1>0$
+ 
+ \bgprop{
+   Si $a<b$ et $b<c$, alors $a<c$. 
+ }
+
+ \ul{Ex:} $-1<0$ et $0<3$, donc $-1<3$\,;
+ %\hspace{0.8cm} 
+ $\sqrt{2}<2$ et $\pi>2$, donc $\sqrt{2}<\pi$\,;
+
+ \vspd
+ \hspace{0.8cm} $\dsp\frac{2}{3}<1$ et $\dsp\frac{12}{11}>1$, donc
+            $\dsp\frac{2}{3}<\frac{12}{11}$ 
+ 
+
+ \bgprop{
+   Si $a>0$, $b>0$ et $a>b$ alors $a^2>b^2$ et $\sqrt{a}>\sqrt{b}$ 
+   et $\dsp\frac{1}{b}<\frac{1}{a}$.
+ }
+ 
+ \vspd
+ \ul{Démonstration:}  
+   $\bullet$
+     $a^2-b^2=\underbrace{\lp a+b\rp}_{>0}\underbrace{\lp a-b\rp}_{>0}>0$, 
+     d'où, $a^2>b^2$. 
+
+     \vspd
+   $\bullet$
+     $\dsp\sqrt{a}-\sqrt{b}=\frac{\lp\sqrt{a}-\sqrt{b}\rp\lp\sqrt{a}+\sqrt{b}\rp}{\sqrt{a}+\sqrt{b}}=\frac{a-b}{\sqrt{a}+\sqrt{b}}>0$ 
+     \hspace{0.3cm}$\bullet$ $\dsp\frac{1}{b}-\frac{1}{a}=\frac{b-a}{ab}<0$.
+  %\enit
+  
+  \vspt
+  \ul{Exemples et contre-exemples:}
+
+  $\bullet$ $3<5$ donc $3^2<5^2$ \hspace{2.61cm}
+  $\bullet$ $2<\pi$ donc $\sqrt{2}<\sqrt{\pi}$ et 
+    $\dsp\frac{1}{\pi}<\frac{1}{2}$
+
+  $\bullet$ $-5<-3$ mais $(-5)^2>(-3)^2$ \hspace{1cm} 
+  $\bullet$ $-3<2$ mais $-\frac{1}{3}<\frac{1}{2}$
+
+
+  \bgprop{
+    Si $a<b$ et $c<d$ alors $a+c<b+d$. 
+  }
+
+  \bgprop{
+    Si $a<b$ et $c>0$ alors $ac<bc$.
+    Si $a<b$ et $c<0$ alors $ac>bc$.
+  }
+  
+  \vspd
+  \ul{Ex:} $2<3$ alors $2\tm 2<3\tm 2$ mais $-2>-3$
+
+  \bgprop{
+    Si a, b, c et d sont des nombres \ul{positifs} et si $a<b$ et
+    $c<d$ alors $ac<bd$.
+  }
+
+  \vspd
+  \ul{Exemples et contre-exemples:}\vspd
+
+  $\bullet$ $3<5$ et $\pi<4$, donc $3\pi<20$ \hspace{1cm}
+  $\bullet$ $-4<5$ et $-2<-1$, mais $8>-5$  
+  
+ \bgprop{
+   Si $0<a<1$ alors $a^3<a^2<a$. 
+   Si $a>1$ alors, $a^3>a^2>a$. 
+ }
+
+
+ \sectionc{Intervalles de $\R$}
+
+ \bgdef{
+   Soit a et b deux nombres réels tesl que $a<b$. 
+   L'ensemble des nombres réels x vérifiant la double inégalité 
+   $a\leq x\leq b$ est appelé intervalle fermé de $\R$. 
+   On le note $[a,b]$. 
+   
+   Les nombres a et b sont les bornes de l'intervalle $[a,b]$, et b-a
+   son amplitude (ou longueur). 
+ }
+
+% \vspd
+% \ct{\ulb{Intervalles de $\R$} }
+
+ \vspd
+ \setlength{\unitlength}{1cm}
+ \hspace{1.5cm}
+ \begin{tabular}{|c|c|c|} \hline
+   Intervalle & Encadrement & Représentation sur une droite\\\hline
+   $[a,b]$ & $a\leq x\leq b$ & 
+   \makebox[5cm]{
+     \put(-2,0){\vector(1,0){4}}
+     \put(-1,0){\textcolor{red}{\line(1,0){2}}}
+     \put(-1.1,0.3){a}\put(1.,0.3){b}
+     \put(-1.1,-.1){$[$}\put(1.,-.1){$]$}
+   } \\\hline
+   $]a,b[$ & $a< x< b$ & 
+   \makebox[5cm]{
+     \put(-2,0){\vector(1,0){4}}
+     \put(-1,0){\textcolor{red}{\line(1,0){2}}}
+     \put(-1.1,0.3){a}\put(1.,0.3){b}
+     \put(-1.1,-.1){$]$}\put(1.,-.1){$[$}
+   } \\\hline
+   $]a,b]$ &  & \\\hline
+   $[a,b[$ &  & \\\hline
+   $[a,+\infty[$ & $a\leq x<\infty$ & 
+	       \makebox[5cm]{
+		 \put(-2,0){\vector(1,0){4}}
+		 \put(-1,0){\textcolor{red}{\vector(1,0){3}}}
+		 \put(-1.1,0.3){a}
+		 \put(-1.1,-.1){$[$}
+	       } \\\hline
+
+   $]a,+\infty[$ &  & \\\hline
+   $]-\infty,b]$ &  & \\\hline
+   $]-\infty,b[$ &  & \\\hline
+
+
+ \end{tabular}
+
+ 
+ \sectionc{Valeur absolue et distance}
+ 
+ \bgdef{
+   Pour $x$ un nombre réel, on appelle valeur absolue de x, notée
+   $|x|$, le nombre \ulr{positif}: 
+    \[ |x| = \la\bgar{l} x\ \mbox{ si, } x\geq0 \\
+                         -x\ \mbox{ si, } x\leq0 \enar\right.\]
+ }
+
+ \ul{Ex:} $|2,35|=2,35$\,;\ $|-124,36|=124,36$\,;\
+     $|-\sqrt{197}|=\sqrt{197}$\,;\ 
+
+     Si $x$ est un nombre réel, $|x-2|=\dots$.
+
+     
+ \bgdef{
+   On appelle distance entre deux nombres réels x et y, notée dist(x,y),
+   celui des deux nombres $x-y$ ou $y-x$ qui est positif. 
+ }
+ \vspace{-0.3cm}
+ \bgprop{
+   La distance entre les nombres réels x et y est dist(x,y)$=|x-y|=|y-x|$.
+ }
+
+ \ul{Ex:} La distance entre 
+
+ $\bullet$ $x=2$ et $y=3$ est $|3-2|=|2-3|=1$
+ 
+ $\bullet$ $x=-2$ et $y=6$ $\dots$
+
+ $\bullet$ $x=-16$ et $y=-4$
+
+ 
+ \ulg{Remarque:} La valeur absolue de x est la distance entre x est
+ 0. 
+
+
+ \bgprop{
+   Soient c un nombre réel et r un nombre réel positif; les quatres
+   propositions suivantes sont équivalentes: 
+   
+   \setlength{\unitlength}{1cm}
+   \bgit
+     \item[$\bullet$] la distance de x à c est inférieure ou égale à r;
+     \item[$\bullet$] $x\in [c-r;c+r]$; 
+     \item[$\bullet$] $|x-c|\leq r$; 
+       \put(2,0){\vector(1,0){6}}
+       \put(3,0){\textcolor{red}{\line(1,0){4}}}
+       \put(4,0.4){\vector(1,0){1}}\put(4,0.4){\vector(-1,0){1}}
+       \put(6,0.4){\vector(1,0){1}}\put(6,0.4){\vector(-1,0){1}}
+       \put(4,0.6){$r$}\put(6,0.6){$r$}
+       \put(5,-.1){$|$}\put(5,-0.4){$c$}
+       \put(3,-.1){\textcolor{red}{$[$}}\put(2.7,-.5){$c-r$}
+       \put(7,-.1){\textcolor{red}{$]$}}\put(6.7,-.5){$c+r$}
+
+     \item[$\bullet$] $c-r\leq x\leq c+r$;
+   \enit
+   }
+
+ \ul{Ex:}
+ $\bullet$ $|x-2|\leq 3$ $\cdots$
+ 
+ $\bullet$ $x\in [-3,5]$ s'écrit de façon équivalente $|x-1|\leq 4$
+ car $1=\frac{-3+5}{2}$ et $4=\frac{5-(-3)}{2}=\frac{\mbox{dist}(x,y)}{2}$.
+
+
+
+
+ \sectionc{Valeur approchée d'un nombre réel}
+
+ \bgdef{
+   On appelle valeur approchée d'un nombre réel x à la précision e (ou
+   à ``e près'') tout nombre réel a tel que $|x-a|\leq e$
+ }
+
+ \setlength{\unitlength}{1cm}
+ \makebox[10cm]{
+   \put(-2,0){\vector(1,0){4}}
+   \put(-1,0){\textcolor{red}{\line(1,0){2}}}
+   \put(-1.3,0.3){$a-e$}\put(0.7,0.3){$a+e$}
+   \put(-1.1,-.1){$[$}\put(1.,-.1){$]$}
+   \put(0,-.1){$|$}\put(-.1,0.3){$a$}
+   \put(-.5,-.4){$x$}
+ }
+
+ \ul{Ex:} $\bullet$ $1,4$ est une valeur approchée de $\sqrt{2}$ à
+ $0,1$ près car $|\sqrt{2}-1,2|\leq 0,1$
+
+ $\bullet$ $3,1$ et $3,12$ sont deux valeurs approchées de $\pi$ à
+ $0,1$ près. 
+
+ \ulr{Remarque:} Les calculatrices et ordinateurs calculent et
+ utilisent des valeurs approchées des nombres réels à $\cdots$ près. 
+
+ Ex: $\pi\sim\cdots$
+
+\label{LastPage}
+\end{document}
